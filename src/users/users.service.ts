@@ -27,11 +27,11 @@ export class UsersService {
         @Inject(TRANSPORTER_PROVIDER)
         private transporter: nodemailer.Transporter,
     ) {
-        this.transporter = nodemailer.createTransport(nodemailer.createTransport({
-            host: 'smtp.gmail.com', port: 465, secure: true, auth: {
+        this.transporter = nodemailer.createTransport({
+            host: 'smtp.zoho.eu', port: 465, secure: true, auth: {
                 user: process.env.MAIL_LOG, pass: process.env.MAIL_PASS
             },
-        }))
+        })
     }
 
     async createUser(user: CreateUserDto) {
@@ -74,6 +74,7 @@ export class UsersService {
 
     async findAllUsers() {
         try {
+            console.log(process.env.MAIL_PASS);
             return await this.userModel.find();
 
         } catch (error) {

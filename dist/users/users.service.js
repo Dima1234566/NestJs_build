@@ -28,11 +28,11 @@ let UsersService = class UsersService {
         this.jwtService = jwtService;
         this.userModel = userModel;
         this.transporter = transporter;
-        this.transporter = nodemailer.createTransport(nodemailer.createTransport({
-            host: 'smtp.gmail.com', port: 465, secure: true, auth: {
+        this.transporter = nodemailer.createTransport({
+            host: 'smtp.zoho.eu', port: 465, secure: true, auth: {
                 user: process.env.MAIL_LOG, pass: process.env.MAIL_PASS
             },
-        }));
+        });
     }
     async createUser(user) {
         try {
@@ -69,6 +69,7 @@ let UsersService = class UsersService {
     }
     async findAllUsers() {
         try {
+            console.log(process.env.MAIL_PASS);
             return await this.userModel.find();
         }
         catch (error) {

@@ -28,7 +28,7 @@ let TelegramService = class TelegramService {
         this.postModel = postModel;
         this.postService = postService;
         const token = process.env.TELEGRAM_KEY;
-        this.bot = new TelegramBot(token, { polling: false });
+        this.bot = new TelegramBot(token, { polling: true });
         this.startTgBot();
     }
     async startTgBot() {
