@@ -14,7 +14,7 @@ async function verifyEmails(userId) {
     <h1>Дякуємо за реєстрацію</h1>
     <p>
       Для підтвердження натисність
-      <a href="${process.env.LINK_BACK}verify-email/${userId}" target="_blank">сюди</a>
+      <a href="${process.env.LINK_BACK}users/verify-email/${userId}" target="_blank">сюди</a>
     </p>
   </body>
 </html>
