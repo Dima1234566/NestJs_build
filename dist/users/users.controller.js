@@ -176,7 +176,7 @@ __decorate([
     (0, common_1.Post)("/upload"),
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)("file", 5, {
         storage: (0, multer_1.diskStorage)({
-            destination: ",/upload",
+            destination: "upload",
             filename: (req, file, cd) => {
                 const filename = path.parse(file.originalname).name.replace(/\s/g, "") + "-" + Date.now();
                 const extension = path.parse(file.originalname).ext;

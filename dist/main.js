@@ -17,7 +17,7 @@ async function start() {
         },
     }));
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('SwapNShare server')
+        .setTitle('My usefull site')
         .setDescription('REST API Documentation')
         .setVersion('1.0.0')
         .addBearerAuth({
@@ -26,7 +26,7 @@ async function start() {
         in: 'header',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-    }, 'BearerAuthMethod')
+    }, 'BearerAuthMethod').addServer("https://nestjs-build-eoou.onrender.com")
         .addServer(`http://localhost:${PORT}`)
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);

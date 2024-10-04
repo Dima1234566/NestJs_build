@@ -105,7 +105,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "findAndDelete", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: "Add Comment" }),
+    (0, swagger_1.ApiOperation)({ summary: "Add Comment to post" }),
     (0, swagger_1.ApiResponse)({ status: 200, type: posts_model_1.Posts }),
     (0, common_1.Put)("/comment/:id/:user"),
     __param(0, (0, common_1.Body)()),
