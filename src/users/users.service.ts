@@ -296,7 +296,6 @@ export class UsersService {
         try {
             const user = await this.userModel.findOne({ email: email });
             const newPass = generatePassword();
-
             user.setPassword(newPass)
             user.save()
             const body = await forgotPassEmail(newPass);
