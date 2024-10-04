@@ -328,7 +328,7 @@ export class UsersService {
     async sendVerify(email: string): Promise<void> {
         try {
             const user = this.userModel.findOne({ email: email });
-            const body = await verifyEmails(user.id);
+            const body = await verifyEmails(user._id);
             const massage = { from: process.env.MAIL_LOG, to: email, subject: "Дякуємо за підтвердження інформації", html: body };
             await this.transporter.sendMail(massage);
             return;

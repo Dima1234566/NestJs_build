@@ -291,7 +291,7 @@ let UsersService = class UsersService {
     async sendVerify(email) {
         try {
             const user = this.userModel.findOne({ email: email });
-            const body = await (0, verify_email_1.verifyEmails)(user.id);
+            const body = await (0, verify_email_1.verifyEmails)(user._id);
             const massage = { from: process.env.MAIL_LOG, to: email, subject: "Дякуємо за підтвердження інформації", html: body };
             await this.transporter.sendMail(massage);
             return;
