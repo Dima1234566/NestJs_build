@@ -183,4 +183,3 @@ export class UsersController {
         return await this.userService.verification(id);
     }
 }
-
