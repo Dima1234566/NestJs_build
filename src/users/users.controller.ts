@@ -86,7 +86,7 @@ export class UsersController {
     @UseInterceptors(
         FilesInterceptor("file", 5, {
             storage: diskStorage({
-                destination: ",/upload",
+                destination: "upload",
                 filename: (req: any, file, cd) => {
                     const filename = path.parse(file.originalname).name.replace(/\s/g, "") + "-" + Date.now();
                     const extension = path.parse(file.originalname).ext;
@@ -183,5 +183,3 @@ export class UsersController {
         return await this.userService.verification(id);
     }
 }
-
-

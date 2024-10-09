@@ -1,0 +1,1 @@
+{"version":3,"file":"coment.post.dto.js","sourceRoot":"","sources":["../../../src/posts/dto/coment.post.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AACA,6CAA8C;AAG9C,MAAa,cAAc;CAQ1B;AARD,wCAQC;AAJY;IAHR,IAAA,qBAAW,EAAC;QACT,OAAO,EAAE,EAAE,IAAI,EAAE,SAAS,EAAE,EAAE,WAAW,EAAE,cAAc;KAC5D,CAAC;;gDACyB"}

@@ -1,7 +1,9 @@
-/* eslint-disable prettier/prettier */
-
-export async function verifyEmails(userId: string) {
-  return `<!DOCTYPE html>
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.verifyEmails = verifyEmails;
+exports.forgotPassEmail = forgotPassEmail;
+async function verifyEmails(userId) {
+    return `<!DOCTYPE html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
@@ -16,12 +18,10 @@ export async function verifyEmails(userId: string) {
     </p>
   </body>
 </html>
-`
+`;
 }
-
-
-export async function forgotPassEmail(password: string) {
-  return `<!DOCTYPE html>
+async function forgotPassEmail(password) {
+    return `<!DOCTYPE html>
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
@@ -35,5 +35,6 @@ export async function forgotPassEmail(password: string) {
     </p>
   </body>
 </html>
-`
+`;
 }
+//# sourceMappingURL=verify.email.js.map

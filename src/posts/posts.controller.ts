@@ -52,7 +52,7 @@ export class PostsController {
         return await this.postService.findAndDelete(id);
     }
 
-    @ApiOperation({ summary: "Add Comment" })
+    @ApiOperation({ summary: "Add Comment to post" })
     @ApiResponse({ status: 200, type: Posts })
     @Put("/comment/:id/:user")
     async addCommentsPost(@Body() comment: CommentPostDto, @Param('id') id: string, @Param('user') user: string): Promise<Posts> {

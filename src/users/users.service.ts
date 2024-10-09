@@ -27,11 +27,11 @@ export class UsersService {
         @Inject(TRANSPORTER_PROVIDER)
         private transporter: nodemailer.Transporter,
     ) {
-        this.transporter = nodemailer.createTransport(nodemailer.createTransport({
-            host: 'smtp.gmail.com', port: 465, secure: true, auth: {
+        this.transporter = nodemailer.createTransport({
+            host: 'smtp.zoho.eu', port: 465, secure: true, auth: {
                 user: process.env.MAIL_LOG, pass: process.env.MAIL_PASS
             },
-        }))
+        })
     }
 
     async createUser(user: CreateUserDto) {
@@ -74,6 +74,7 @@ export class UsersService {
 
     async findAllUsers() {
         try {
+            console.log(process.env.MAIL_PASS);
             return await this.userModel.find();
 
         } catch (error) {
@@ -296,7 +297,6 @@ export class UsersService {
         try {
             const user = await this.userModel.findOne({ email: email });
             const newPass = generatePassword();
-
             user.setPassword(newPass)
             user.save()
             const body = await forgotPassEmail(newPass);
@@ -328,7 +328,7 @@ export class UsersService {
     async sendVerify(email: string): Promise<void> {
         try {
             const user = this.userModel.findOne({ email: email });
-            const body = await verifyEmails(user.id);
+            const body = await verifyEmails(user._id);
             const massage = { from: process.env.MAIL_LOG, to: email, subject: "Дякуємо за підтвердження інформації", html: body };
             await this.transporter.sendMail(massage);
             return;
