@@ -35,4 +35,6 @@ export declare class UsersController {
         refresh_token: any;
     }>;
     verifyEmail(id: string): Promise<User>;
+    favorites(id: string, req: any): Promise<User>;
+    deleteFromFavorites(id: string, req: any): Promise<User>;
 }

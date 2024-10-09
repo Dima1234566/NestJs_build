@@ -32,6 +32,10 @@ export class Posts extends Model<Posts> {
     @Prop({ type: Array, default: [] })
     comments: [Comment];
 
+    @ApiProperty({ example: "лайк або є або нема", description: "лайк" })
+    @Prop({ type: Array, default: [] })
+    likes: [];
+
 
 }
 export const PostSchema = SchemaFactory.createForClass(Posts);

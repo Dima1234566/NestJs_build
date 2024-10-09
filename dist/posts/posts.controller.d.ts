@@ -19,4 +19,5 @@ export declare class PostsController {
         currentPage: number;
         data: any;
     }>;
+    likes(id: string, req: any): Promise<Posts>;
 }

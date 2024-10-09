@@ -182,4 +182,24 @@ export class UsersController {
     async verifyEmail(@Param('id') id: string): Promise<User> {
         return await this.userService.verification(id);
     }
+
+    @ApiOperation({ summary: "favorite posts" })
+    @ApiResponse({ status: 200, type: User })
+    @ApiBearerAuth("BearerAuthMethod")
+    @HttpCode(200)
+    @Post("/favorites/:id")
+    async favorites(@Param("id") id: string, @Req() req: any): Promise<User> {
+        return await this.userService.favorites(id, req);
+    }
+
+    @ApiOperation({ summary: "delete from favorite posts" })
+    @ApiResponse({ status: 200, type: User })
+    @ApiBearerAuth("BearerAuthMethod")
+    @HttpCode(200)
+    @Delete("/delete-favorites/:id")
+    async deleteFromFavorites(@Param("id") id: string, @Req() req: any): Promise<User> {
+        return await this.userService.deleteFromFavorites(id, req);
+    }
+
+
 }

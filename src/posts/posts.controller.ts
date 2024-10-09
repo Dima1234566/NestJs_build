@@ -79,6 +79,13 @@ export class PostsController {
         return await this.postService.searchPosts(query);
     }
 
+    @ApiOperation({ summary: "Post LIKE" })
+    @ApiResponse({ status: 201, type: Posts })
+    @ApiBearerAuth("BearerAuthMethod")
+    @Post("/post-like/:id")
+    async likes(@Param('id') id: string, @Req() req: any): Promise<Posts> {
+        return await this.postService.likes(id, req);
+    }
 
 
 }

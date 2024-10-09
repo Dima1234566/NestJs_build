@@ -98,6 +98,12 @@ let UsersController = class UsersController {
     async verifyEmail(id) {
         return await this.userService.verification(id);
     }
+    async favorites(id, req) {
+        return await this.userService.favorites(id, req);
+    }
+    async deleteFromFavorites(id, req) {
+        return await this.userService.deleteFromFavorites(id, req);
+    }
 };
 exports.UsersController = UsersController;
 __decorate([
@@ -272,6 +278,30 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "verifyEmail", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: "favorite posts" }),
+    (0, swagger_1.ApiResponse)({ status: 200, type: users_model_1.User }),
+    (0, swagger_1.ApiBearerAuth)("BearerAuthMethod"),
+    (0, common_1.HttpCode)(200),
+    (0, common_1.Post)("/favorites/:id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "favorites", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: "delete from favorite posts" }),
+    (0, swagger_1.ApiResponse)({ status: 200, type: users_model_1.User }),
+    (0, swagger_1.ApiBearerAuth)("BearerAuthMethod"),
+    (0, common_1.HttpCode)(200),
+    (0, common_1.Delete)("/delete-favorites/:id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "deleteFromFavorites", null);
 exports.UsersController = UsersController = __decorate([
     (0, swagger_1.ApiTags)('Users'),
     (0, common_1.Controller)('users'),

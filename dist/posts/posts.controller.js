@@ -49,6 +49,9 @@ let PostsController = class PostsController {
     async searchPost(query) {
         return await this.postService.searchPosts(query);
     }
+    async likes(id, req) {
+        return await this.postService.likes(id, req);
+    }
 };
 exports.PostsController = PostsController;
 __decorate([
@@ -140,6 +143,17 @@ __decorate([
     __metadata("design:paramtypes", [search_post_dto_1.QueryDto]),
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "searchPost", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: "Post LIKE" }),
+    (0, swagger_1.ApiResponse)({ status: 201, type: posts_model_1.Posts }),
+    (0, swagger_1.ApiBearerAuth)("BearerAuthMethod"),
+    (0, common_1.Post)("/post-like/:id"),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], PostsController.prototype, "likes", null);
 exports.PostsController = PostsController = __decorate([
     (0, swagger_1.ApiTags)("Posts"),
     (0, common_1.Controller)('posts'),

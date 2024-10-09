@@ -91,6 +91,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: Boolean, default: false }),
     __metadata("design:type", Boolean)
 ], User.prototype, "verify", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Array, default: [] }),
+    __metadata("design:type", Array)
+], User.prototype, "favorites", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)({ versionKey: false, timestamps: true })
 ], User);

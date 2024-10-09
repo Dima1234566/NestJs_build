@@ -20,6 +20,7 @@ export declare class User extends Model<User> {
     googleId: string;
     ban: boolean;
     verify: boolean;
+    favorites: [];
 }
 export declare const UserSchema: import("mongoose").Schema<User, Model<User, any, any, any, import("mongoose").Document<unknown, any, User> & User & {
     _id: import("mongoose").Types.ObjectId;

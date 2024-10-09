@@ -66,6 +66,10 @@ export class User extends Model<User> {
     @Prop({ type: Boolean, default: false })
     verify: boolean;
 
+    @Prop({ type: Array, default: [] })
+    favorites: [];
+
+
 }
 
 // status:

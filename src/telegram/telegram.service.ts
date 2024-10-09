@@ -21,7 +21,7 @@ export class TelegramService {
         private postService: PostsService,
     ) {
         const token = process.env.TELEGRAM_KEY;
-        this.bot = new TelegramBot(token, { polling: true });
+        this.bot = new TelegramBot(token, { polling: false });
         this.startTgBot();
     }
 

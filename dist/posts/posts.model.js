@@ -46,6 +46,11 @@ __decorate([
     (0, mongoose_1.Prop)({ type: Array, default: [] }),
     __metadata("design:type", Array)
 ], Posts.prototype, "comments", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: "лайк або є або нема", description: "лайк" }),
+    (0, mongoose_1.Prop)({ type: Array, default: [] }),
+    __metadata("design:type", Array)
+], Posts.prototype, "likes", void 0);
 exports.Posts = Posts = __decorate([
     (0, swagger_1.ApiTags)("Posts"),
     (0, mongoose_1.Schema)({ versionKey: false, timestamps: true })

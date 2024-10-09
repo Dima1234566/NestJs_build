@@ -7,6 +7,7 @@ export declare class Posts extends Model<Posts> {
     owner: string;
     date: Date;
     comments: [Comment];
+    likes: [];
 }
 export declare const PostSchema: import("mongoose").Schema<Posts, Model<Posts, any, any, any, import("mongoose").Document<unknown, any, Posts> & Posts & {
     _id: import("mongoose").Types.ObjectId;

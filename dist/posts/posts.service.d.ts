@@ -27,4 +27,5 @@ export declare class PostsService {
         currentPage: number;
         data: any;
     }>;
+    likes(id: string, req: any): Promise<Posts>;
 }

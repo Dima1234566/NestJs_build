@@ -58,7 +58,7 @@ export class UsersService {
                 regUser.setPassword(password)
                 regUser.save()
                 await this.createToken(regUser)
-                await this.sendVerify(lowerCaseEmail)
+                await this.sendVerify(regUser)
                 return regUser;
 
             } else {
@@ -74,7 +74,6 @@ export class UsersService {
 
     async findAllUsers() {
         try {
-            console.log(process.env.MAIL_PASS);
             return await this.userModel.find();
 
         } catch (error) {
@@ -89,7 +88,6 @@ export class UsersService {
                 return console.error("User not found");
 
             }
-            console.log;
             if (admin && admin.role === 'admin') {
                 return await this.userModel.findById(id)
             } else {
@@ -313,11 +311,11 @@ export class UsersService {
             const user = await this.userModel.findById(userId);
             if (!user) {
                 console.log("user not found");
+            } else {
                 await this.userModel.findByIdAndUpdate({ _id: userId }, {
                     verify: true
                 })
                 return await this.userModel.findById(userId);
-
             }
         } catch (error) {
             console.error(error);
@@ -325,17 +323,72 @@ export class UsersService {
 
     }
 
-    async sendVerify(email: string): Promise<void> {
+    async sendVerify(regUser: User): Promise<void> {
         try {
-            const user = this.userModel.findOne({ email: email });
-            const body = await verifyEmails(user._id);
-            const massage = { from: process.env.MAIL_LOG, to: email, subject: "Дякуємо за підтвердження інформації", html: body };
+            const body = await verifyEmails(regUser._id);
+            const massage = { from: process.env.MAIL_LOG, to: regUser.email, subject: "Дякуємо за підтвердження інформації", html: body };
             await this.transporter.sendMail(massage);
             return;
         } catch (error) {
             console.error(error);
         }
     }
+
+    async favorites(id: string, req: any): Promise<User> {
+        try {
+            const user = await this.findToken(req);
+            if (!user) {
+                console.log("не залогований юзер");
+            }
+            const arrayy = user.favorites;
+            const existId = arrayy.some(postId => postId === id)
+            if (existId) {
+                console.log("пост вже добавлено");
+            } else {
+                arrayy.push(id)
+
+                await this.userModel.findByIdAndUpdate(user._id, { $set: { favorites: arrayy } })
+                return await this.userModel.findById(user._id);
+            }
+        } catch (error) {
+            console.error(error);
+
+        }
+
+    }
+
+
+    async deleteFromFavorites(id: string, req: any): Promise<User> {
+        try {
+            const user = await this.findToken(req);
+            if (!user) {
+                console.log("не залогований юзер");
+            }
+            const arrayy = user.favorites;
+            const existId = arrayy.some(postId => postId === id);
+            if (existId) {
+                const deletePost = arrayy.filter(postId => postId !== id);
+                await this.userModel.findByIdAndUpdate(user._id, { $set: { favorites: deletePost } })
+                return await this.userModel.findById(user._id);
+            } else {
+                console.error("пост не добавлявся");
+
+            }
+        } catch (error) {
+            console.error(error);
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
 

@@ -30,7 +30,6 @@ let PostsService = class PostsService {
             if (!post) {
                 return console.log("нема посту");
             }
-            console.log(req);
             const user = await this.userService.findToken(req);
             if (!user) {
                 return console.log("not authorization");
@@ -203,6 +202,35 @@ let PostsService = class PostsService {
                 const offSet = (currentPage - 1) * currentSize;
                 const result = await this.postModel.find().limit(currentSize).skip(offSet).select("_id title description owner date comments");
                 return { totalPages: totalPages, currentPage: currentPage, data: result };
+            }
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+    async likes(id, req) {
+        try {
+            const user = await this.userService.findToken(req);
+            const post = await this.postModel.findById(id);
+            if (!user) {
+                console.log("не залогований юзер");
+            }
+            if (!post) {
+                console.log("postu nema");
+            }
+            else {
+                const arrayy = post.likes;
+                const existId = arrayy.some(likeUserid => likeUserid.toString() === user.id);
+                if (existId) {
+                    const deleteLike = arrayy.filter(userLikeId => userLikeId.toString() !== user.id);
+                    await this.postModel.findByIdAndUpdate(post._id, { $set: { likes: deleteLike } });
+                    return await this.postModel.findById(post._id);
+                }
+                else {
+                    arrayy.push(user._id);
+                    await this.postModel.findByIdAndUpdate(post._id, { $set: { likes: arrayy } });
+                    return await this.postModel.findById(post._id);
+                }
             }
         }
         catch (error) {

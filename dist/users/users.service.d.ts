@@ -37,5 +37,7 @@ export declare class UsersService {
     validateUser(details: GoogleUserDto): Promise<any>;
     forgotPassword(email: string): Promise<void>;
     verification(userId: string): Promise<any>;
-    sendVerify(email: string): Promise<void>;
+    sendVerify(regUser: User): Promise<void>;
+    favorites(id: string, req: any): Promise<User>;
+    deleteFromFavorites(id: string, req: any): Promise<User>;
 }

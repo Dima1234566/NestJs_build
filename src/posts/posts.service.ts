@@ -67,7 +67,7 @@ export class PostsService {
 
                 return console.log("нема посту");
             }
-            console.log(req);
+
 
             const user = await this.userService.findToken(req);
 
@@ -319,9 +319,35 @@ export class PostsService {
     }
 
 
+    async likes(id: string, req: any): Promise<Posts> {
+        try {
+            const user = await this.userService.findToken(req);
+            const post = await this.postModel.findById(id);
 
-    // зробити сортування по якимось полям 
-    // дати забанений юзерів по алфавіту наприклад
+            if (!user) {
+                console.log("не залогований юзер");
+            }
+            if (!post) {
+                console.log("postu nema");
+            } else {
+                const arrayy = post.likes;
+                const existId = arrayy.some(likeUserid => likeUserid.toString() === user.id);
+                if (existId) {
+                    const deleteLike = arrayy.filter(userLikeId => userLikeId.toString() !== user.id);
+                    await this.postModel.findByIdAndUpdate(post._id, { $set: { likes: deleteLike } })
+                    return await this.postModel.findById(post._id);
+                } else {
+                    arrayy.push(user._id)
+                    await this.postModel.findByIdAndUpdate(post._id, { $set: { likes: arrayy } })
+                    return await this.postModel.findById(post._id);
+                }
+            }
+        } catch (error) {
+            console.error(error);
+
+        }
+
+    }
 
 }
 
